@@ -25,12 +25,15 @@ def smoothed_heikin_ashi(df, n=20, ma_type='EMA'):
  """
 
 def heikin_ashi_color(haOpen, haClose):
-    if haClose > haOpen:
-        return 'green'
-    elif haClose < haOpen:
-        return 'red'
+    if isinstance(haOpen, (int, float)) and isinstance(haClose, (int, float)):
+        if haClose > haOpen:
+            return 'green'
+        elif haClose < haOpen:
+            return 'red'
+        else:
+            return '?'
     else:
-        return '?'
+        raise ValueError("haOpen and haClose must be scalar values for each row.")
         
 def calculate_smoothed_heikin_ashi(data, period=20):
     """
