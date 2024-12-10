@@ -25,13 +25,18 @@ def smoothed_heikin_ashi(df, n=20, ma_type='EMA'):
  """
 
 def heikin_ashi_color(haOpen, haClose):
+    if isinstance(haOpen, pd.Series):
+        haOpen = haOpen.iloc[0]
+    if isinstance(haClose, pd.Series):
+        haClose = haClose.iloc[0]
+    
     if haClose > haOpen:
         return 'green'
     elif haClose < haOpen:
         return 'red'
     else:
-        return 'doji'
-    
+        return 'gray'
+        
 def calculate_smoothed_heikin_ashi(data, period=20):
     """
     Calculate Heikin-Ashi values (Open, Close, Low, High) based on Exponential Moving Averages (EMAs)
